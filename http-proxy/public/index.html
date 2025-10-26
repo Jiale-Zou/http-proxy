@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>代理服务测试</title>
+</head>
+<body>
+    <h1>HTTP代理服务运行中</h1>
+    <p>您的云函数已成功部署！</p>
+    <p>使用方式：GET /api/proxy?target=您的API地址</p>
+    
+    <button onclick="testProxy()">测试代理功能</button>
+    <div id="result"></div>
+    
+    <script>
+    async function testProxy() {
+        try {
+            // 替换为您的实际API地址
+            const targetUrl = 'http://kdc268f4.natappfree.cc/quant';
+            const encodedUrl = encodeURIComponent(targetUrl);
+            const proxyUrl = `/api/proxy?target=${encodedUrl}`;
+            
+            const response = await fetch(proxyUrl);
+            const result = await response.json();
+            
+            document.getElementById('result').innerHTML = 
+                '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+        } catch (error) {
+            document.getElementById('result').innerHTML = '错误: ' + error.message;
+        }
+    }
+    </script>
+</body>
+</html>
